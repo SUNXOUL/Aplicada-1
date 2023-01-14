@@ -1,0 +1,43 @@
+﻿@page "/Cronometro"
+<PageTitle>Cronometro</PageTitle>
+<h3>Cronometro</h3>
+<hr>
+<center>
+<p role="status">@hora</p>
+</center>
+<hr>
+<button type="button" class="btn btn-primary" @onclick=run>Iniciar</button>
+<button type="button" class="btn btn-primary" @onclick=cambiarEstado>Pausar/Seguir</button>
+
+@code {
+    Thread hilo;
+    Hora hora = new  Hora(0,0,0);
+    bool   Running = true;
+
+    public async void run() {
+
+		while (this.Running) {
+            try{
+            this.hora.sumarSegundos(1);
+            Thread.Sleep(1000);
+            StateHasChanged();
+            }
+            catch(Exception e){
+                Console.WriteLine("SE JODIO");
+                Console.WriteLine(e.Message);
+            }
+	    }
+    }
+
+    public void cambiarEstado()
+    {
+        if(this.Running!=true){
+            this.Running = true;
+        }
+        else{
+            this.Running=false;
+        }
+    }
+
+    
+}

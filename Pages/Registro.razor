@@ -1,0 +1,80 @@
+﻿@page "/Registro"
+<PageTitle>Registro</PageTitle>
+<h3>Registro</h3>
+
+<hr>
+<input placeholder="Nombre" @bind="Nombre" />
+<input placeholder="Apellido" @bind="Apellido" />
+<input placeholder="Edad" @bind="Edad" />
+<input placeholder="Titulo" @bind="Titulo" />
+<button type="button" class="btn btn-primary" @onclick=Add>Agregar</button>
+<button type="button" class="btn btn-primary" @onclick=LimpiarInput>Limpiar</button>
+<br>
+<br>
+<br>
+<button  type="button" class="btn btn-primary"  @onclick=BorrarLista>Borrar Lista</button>
+<h4><center><b>Tabla</b></center></h4>
+<hr>
+
+
+<table>
+    
+  <tr>
+    
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Edad</th>
+    <th>Titulo</th>
+  </tr>
+  
+    @foreach (var Persona in Personas)
+    {
+        <tr>
+        <td>@Persona.Nombre</td>
+        <td>@Persona.Apellido</td>
+        <td>@Persona.Edad</td>
+        <td>@Persona.Titulo</td>
+        </tr>
+    }
+    
+
+</table>
+
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #DDD;
+}
+
+tr:hover {background-color: #D6EEEE;}
+</style>
+
+@code {
+    private List<Persona> Personas = new();
+    public String? Nombre;
+    public String? Apellido;
+    public int? Edad;
+    public String? Titulo;
+
+    public void Add()
+    {
+        Personas.Add(new Persona(Nombre,Apellido,Convert.ToInt32(Edad),Titulo));
+        LimpiarInput();
+    }
+    public void LimpiarInput()
+    {
+        Nombre = Apellido = Titulo = String.Empty;
+        Edad=null;
+    }
+    public void BorrarLista()
+    {
+        Personas.Clear();
+    }
+
+}

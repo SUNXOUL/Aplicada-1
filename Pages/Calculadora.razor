@@ -1,0 +1,64 @@
+﻿@page "/calculadora"
+
+    <PageTitle>Calculadora</PageTitle>
+
+
+    <body>
+<link rel="stylesheet" href="Styles.razor.css">
+<h3 class="Titulo">Calculadora</h3>
+<hr>
+<button type="button" class="btn btn-primary" @onclick=limpiar>Limpiar</button>
+<input placeholder=""  @bind="A"/>
+<input placeholder=""  @bind="B"/>
+<br><br>
+<button type="button" class="btn btn-primary" @onclick=sumar >Sumar</button>
+<button type="button" class="btn btn-primary" @onclick=restar >Restar</button>
+<button type="button" class="btn btn-primary" @onclick=multiplicar >Multiplicar</button>
+<button type="button" class="btn btn-primary" @onclick=dividir >Dividir</button>
+<br>
+<hr>
+<label ><b> Resultado:</b></label> <label>@Resultado</label>
+<hr>
+
+
+
+
+</body>
+
+@code {
+        public  double? A;
+        public  double? B;
+        public  double? Resultado;
+
+
+        public  Calculadora()
+        {
+            this.A = null;
+            this.B = null;
+            this.Resultado = null;
+        }
+
+        public void sumar()
+        {
+            this.Resultado=(this.A+this.B);
+        }
+        public  void restar()
+        {
+            this.Resultado=(this.A-this.B);
+        }
+        public void multiplicar()
+        {
+            this.Resultado=(this.A*this.B);
+        }
+        public void dividir()
+        {
+            this.Resultado=(this.A/this.B);
+        }
+            public void limpiar()
+        {
+            this.Resultado=0;
+            this.A=null;
+            this.B=null;
+        }
+
+}
